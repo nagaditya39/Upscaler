@@ -1,4 +1,4 @@
 from django import forms
 
-class userInputUpload(forms.form):
-    input_field = forms.ChoiceField(label="Enter Image:")
+class userInputUpload(forms.Form):
+    input_img = forms.FileField(label="Uplaod Image:")
