@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>View Images</title>
+</head>
+<body>
+    <h1>View Images</h1>
+    <ul>
+        {% for image in images %}
+            <li>
+                <p>Image Name: {{image.name}}</p>
+                <img src="{{ image.low_res.url }}" alt="{{ image.name }}">
+                <form action="{% url 'delete_image' image.id %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit">Delete</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'upload_file' %}">Upload Images</a>
+</body>
+</html>

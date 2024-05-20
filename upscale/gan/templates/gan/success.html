@@ -5,8 +5,26 @@
 </head>
 <body>
     <h1>Image Uploaded Success</h1>
-    {% if upload_url %} 
-        <img src="{{ upload_url }}" alt="Uploaded Image">
-    {% endif %}
+    <ul>
+        <li>
+            {% if upload_url %} 
+                <h2>Image Name: {{imgName_url}}</h2>
+                <img src="{{ upload_url }}" alt="Uploaded Image">
+            {% endif %}
+            <br>
+        </li>
+    
+        <li>
+            <h2>
+            <a href="{% url 'upload_file' %}">Upload Images</a>
+            </h2>
+        </li>
+            <li>
+                <h2>
+                    <a href="{% url 'view_images' %}">View Uploaded Images</a>
+                </h2>
+        </li>
+
+    </ul>
 </body>
 </html>
