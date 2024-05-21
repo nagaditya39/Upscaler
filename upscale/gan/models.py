@@ -4,7 +4,7 @@ import PIL
 from PIL import Image
 import numpy as np
 import tensorflow as tf
-from tensorflow.keras.models import load_model
+from keras.models import load_model
 from utils import read_image, scale_image_0_1_range, tensor2img
 # Create your models here.
 
