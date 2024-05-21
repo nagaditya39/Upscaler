@@ -1,3 +1,4 @@
+from io import BytesIO
 import os
 from django.shortcuts import render, redirect
 from django.conf import settings
@@ -44,21 +45,25 @@ def upload_file(request):
                 print("[!] Model file not found.")
                 return HttpResponse("Model file not found.")
 
-            upscaled_image_array = upscale_image(image_instance.input_image.path, model)
-            upscaled_image = Image.fromarray(upscaled_image_array)
+            if image_instance.input_image and image_instance.ground_img: 
+                upscaled_image_array = upscale_image(image_instance.input_image.path, model)
+                upscaled_image = Image.fromarray(upscaled_image_array)
+                
 
-
-            if image_instance.ground_img:  
                 ground_truth_image_array = read_image(image_instance.ground_img.path)
                 psnr_value = calculate_psnr(ground_truth_image_array, upscaled_image_array)
                 ssim_value = calculate_ssim(ground_truth_image_array, upscaled_image_array)
                 image_instance.psnr = psnr_value
                 image_instance.ssim = ssim_value
             
-            image_instance.output_image.save(f"upscaled_{image_instance.id}.png", upscaled_image)
-
-            image_instance.save()
-            return redirect('success')  
+                image_buffer = BytesIO() 
+                upscaled_image.save(image_buffer, format='PNG')  # Save image to the buffer
+                image_buffer.seek(0)  # Reset the buffer pointer to the beginning
+                image_instance.output_image.save(f"upscaled_{image_instance.id}.png", image_buffer)
+                image_instance.save()
+                return redirect('success')  
+            else:
+                return HttpResponse("Please upload both input and ground truth images.")
         else:
             return HttpResponse("Please upload an image file.")
     else:

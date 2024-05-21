@@ -9,7 +9,7 @@ import re
 def read_image(img_path):
     base=os.path.basename(img_path)
     ext = os.path.splitext(base)[1]
-    assert ext in ['.png', '.jpg', '.jpeg', '.JPEG']
+    assert ext in ['.PNG','.JPG','.png', '.jpg', '.jpeg', '.JPEG']
     image = tf.io.read_file(img_path)
     if ext == '.png':
         image = tf.image.decode_png(image, channels=3)
