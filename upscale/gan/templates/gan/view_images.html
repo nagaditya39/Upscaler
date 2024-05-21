@@ -8,8 +8,9 @@
     <ul>
         {% for image in images %}
             <li>
-                <p>Image Name: {{image.name}}</p>
+                <p>Image Name: {{ image.name }}</p>
                 <img src="{{ image.low_res.url }}" alt="{{ image.name }}">
+                <img src="{{ MEDIA_URL }}gan/files/user_inp/upscaled_{{ image.id }}.png" alt="Upscaled HR Image">
                 <form action="{% url 'delete_image' image.id %}" method="post">
                     {% csrf_token %}
                     <button type="submit">Delete</button>
@@ -17,6 +18,6 @@
             </li>
         {% endfor %}
     </ul>
-    <a href="{% url 'upload_file' %}">Upload Images</a>
+    <a href="{% url 'upload_file' %}">Upload Image</a>
 </body>
 </html>

@@ -18,6 +18,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+
+RRDB_MODEL_PATH = os.path.join(BASE_DIR, 'model', 'interp_esr.h5')
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 

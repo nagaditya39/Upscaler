@@ -1,8 +1,8 @@
 from django.shortcuts import render,redirect
 from .forms import userInputUpload
 from .models import scaled
-import os
-# Create your views here.
+from django.conf import settings
+import os# Create your views here.
 
 def upload_file(request):
    
@@ -10,12 +10,16 @@ def upload_file(request):
         form = userInputUpload(request.POST,request.FILES)
         print(request.FILES)
         if form.is_valid():
-           form.save()
-
-           return redirect('success')  
+            image_instance = form.save()
+            image_instance.save()
+            upscaled_image = image_instance.upscale_image()
+            upscaled_image_path = os.path.join(settings.MEDIA_ROOT, 'gan/files/user_inp', f"upscaled_{image_instance.id}.png")
+            upscaled_image.save(upscaled_image_path)
+            return redirect('view_images')
     else:
         form = userInputUpload()
     return render(request, 'gan/upload.html', {'form': form})
+
 
 def success_view(request):
     
