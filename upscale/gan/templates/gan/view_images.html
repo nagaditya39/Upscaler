@@ -51,7 +51,10 @@
     </style>
 </head>
 <body>
-    <h1>View Images</h1>
+    <ul>
+        <li><h2><a href="{% url 'upload_file' %}">Upload Images</a></h2></li>
+    </ul>
+    <h1>Upscaled Images</h1>
     <ul>
         {% for image in images %}
             <li>
@@ -84,6 +87,6 @@
             </li>
         {% endfor %}
     </ul>
-    <a href="{% url 'upload_file' %}">Upload Image</a>
+
 </body>
 </html>
