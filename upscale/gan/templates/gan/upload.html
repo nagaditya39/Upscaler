@@ -1,7 +1,39 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Upload Image</title>
+    <title>Upscaler</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 50px;
+        }
+        form {
+            width: 50%;
+            margin: 0 auto;
+            text-align: center;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        h2 {
+            text-align: center;
+            margin-top: 20px;
+        }
+        h4 {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
     <h1>Upload an Image</h1>
@@ -10,8 +42,8 @@
         {{ form.as_p }}
         <button type="submit">Upload</button>
     </form>
-    <h2>
-        <a href="{% url 'view_images' %}">View Uploaded Images</a>
-    </h2>
+    <h2><a href="{% url 'view_images' %}">View Uploaded Images</a></h2>
+    <h4>Input image size: 128x128</h4>
+    <h4>ground truth size: 512x512</h4>
 </body>
 </html>

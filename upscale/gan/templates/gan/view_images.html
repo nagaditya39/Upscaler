@@ -2,6 +2,53 @@
 <html>
 <head>
     <title>View Images</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 50px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin-top: 20px;
+            text-align: center;
+        }
+        img {
+            max-width: 300px;
+            display: block;
+            margin: 0 auto;
+        }
+        form {
+            text-align: center;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #dc3545;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        a {
+            text-decoration: none;
+            color: #007bff;
+        }
+        .image-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .image-container img {
+            margin: 10px;
+        }
+    </style>
 </head>
 <body>
     <h1>View Images</h1>
@@ -9,24 +56,29 @@
         {% for image in images %}
             <li>
                 <h2>Image Name: {{ image.input_image.name }}</h2>
-
-                {% if image.input_image %}
-                    <img src="{{ image.input_image.url }}">
-                {% else %}
-                    <p>No Input Image Uploaded</p>
-                {% endif %}
-
-                {% if image.output_image %}
-                    <img src="{{ image.output_image.url }}">
-                {% else %}
-                    <p>Upscaled Image Not Yet Available</p>
-                {% endif %}
-
+                <div class="image-container">
+                    {% if image.input_image %}
+                        <img src="{{ image.input_image.url }}">
+                    {% else %}
+                        <p>No Input Image Uploaded</p>
+                    {% endif %}
+                </div>
+                <div class="image-container">
+                    {% if image.output_image %}
+                        <img src="{{ image.output_image.url }}">
+                    {% else %}
+                        <p>Upscaled Image Not Yet Available</p>
+                    {% endif %}
+                    {% if image.ground_img %}
+                        <img src="{{ image.ground_img.url }}">
+                    {% else %}
+                        <p>No Ground Truth Uploaded</p>
+                    {% endif %}
+                </div>
                 <form action="{% url 'delete_image' image.id %}" method="post">
                     {% csrf_token %}
                     <button type="submit">Delete</button>
                 </form>
-
                 <p>PSNR: {{ image.psnr }}</p>
                 <p>SSIM: {{ image.ssim }}</p>
             </li>

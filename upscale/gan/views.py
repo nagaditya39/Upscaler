@@ -24,6 +24,7 @@ def upscale_image(image_path, model):
     generated_hr_image = tensor2img(generated_hr)
     return generated_hr_image
 
+
 def upload_file(request):
     if request.method == 'POST':
         form = userInputUpload(request.POST, request.FILES)
@@ -57,8 +58,9 @@ def upload_file(request):
                 image_instance.ssim = ssim_value
             
                 image_buffer = BytesIO() 
-                upscaled_image.save(image_buffer, format='PNG')  # Save image to the buffer
-                image_buffer.seek(0)  # Reset the buffer pointer to the beginning
+                upscaled_image.save(image_buffer, format='PNG')  
+                image_buffer.seek(0)  
+
                 image_instance.output_image.save(f"upscaled_{image_instance.id}.png", image_buffer)
                 image_instance.save()
                 return redirect('success')  
