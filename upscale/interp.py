@@ -5,7 +5,7 @@ import PIL
 from PIL import Image
 from pathlib import Path
 import tensorflow as tf
-from tensorflow.keras.models import load_model
+from keras.models import load_model
 from .esrgan import rrdb_net
 from .utils import read_image, scale_image_0_1_range, tensor2img
 from .utils import save_image_grid

@@ -1,8 +1,8 @@
 # esrgan.py
 import tensorflow as tf
-from tensorflow.keras import Model
-from tensorflow.keras.layers import Input, Conv2D, LeakyReLU, PReLU
-from tensorflow.keras.layers import Concatenate, Lambda, Add
+from keras import Model
+from keras.layers import Input, Conv2D, LeakyReLU, PReLU
+from keras.layers import Concatenate, Lambda, Add
 
 
 def residual_dense_block(input, filters):
