@@ -8,13 +8,27 @@
     <ul>
         {% for image in images %}
             <li>
-                <p>Image Name: {{ image.name }}</p>
-                <img src="{{ image.low_res.url }}" alt="{{ image.name }}">
-                <img src="{{ MEDIA_URL }}gan/files/user_inp/upscaled_{{ image.id }}.png" alt="Upscaled HR Image">
+                <h2>Image Name: {{ image.input_image.name }}</h2>
+
+                {% if image.input_image %}
+                    <img src="{{ image.input_image.url }}">
+                {% else %}
+                    <p>No Input Image Uploaded</p>
+                {% endif %}
+
+                {% if image.output_image %}
+                    <img src="{{ image.output_image.url }}">
+                {% else %}
+                    <p>Upscaled Image Not Yet Available</p>
+                {% endif %}
+
                 <form action="{% url 'delete_image' image.id %}" method="post">
                     {% csrf_token %}
                     <button type="submit">Delete</button>
                 </form>
+
+                <p>PSNR: {{ image.psnr }}</p>
+                <p>SSIM: {{ image.ssim }}</p>
             </li>
         {% endfor %}
     </ul>

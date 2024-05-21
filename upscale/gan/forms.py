@@ -4,4 +4,4 @@ from .models import scaled
 class userInputUpload(forms.ModelForm):
     class Meta:
         model = scaled
-        fields = ['name','low_res']
+        fields = ['input_image','ground_img']
