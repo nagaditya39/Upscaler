@@ -1,10 +1,9 @@
 from django.db import models
 from django.conf import settings
-import PIL
 from PIL import Image
 import numpy as np
 import tensorflow as tf
-from keras.models import load_model
+from keras._tf_keras.keras.models import load_model
 from utils import read_image, scale_image_0_1_range, tensor2img
 # Create your models here.
 
