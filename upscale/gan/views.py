@@ -38,12 +38,12 @@ def upload_file(request):
                     h5_model = load_model(MODEL_PATH, custom_objects={'tf': tf})
                     weights = h5_model.get_weights()
                     model.set_weights(weights)
-                    print(f"[*] Model weights loaded from {MODEL_PATH}")
+                    print(f"Model weights loaded from {MODEL_PATH}")
                 except Exception as e:
-                    print(f"[!] Error loading model: {e}")
+                    print(f"Error loading model: {e}")
                     return HttpResponse(f"Error loading model: {e}")
             else:
-                print("[!] Model file not found.")
+                print("Model file not found.")
                 return HttpResponse("Model file not found.")
 
             if image_instance.input_image and image_instance.ground_img: 
